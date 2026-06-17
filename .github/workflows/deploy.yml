@@ -1,0 +1,26 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Stop old container
+        run: docker compose --profile prod down || true
+
+      - name: Build new image
+        run: docker compose --profile prod build --no-cache
+
+      - name: Start container
+        run: docker compose --profile prod up -d
+
+      - name: Verify
+        run: docker ps
