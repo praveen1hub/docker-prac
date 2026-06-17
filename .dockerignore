@@ -1,5 +1,12 @@
 node_modules
 dist
 .git
-.github
-*.md
+.gitignore
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+Dockerfile
+docker-compose*.yml
+nginx.conf

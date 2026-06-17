@@ -8,6 +8,8 @@ services:
       - /app/node_modules
     ports:
       - "5173:5173"
+    environment:
+      - NODE_ENV=development
     command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
 
   ncart-prod:
@@ -17,5 +19,7 @@ services:
       dockerfile: Dockerfile
       target: runner
     ports:
-      - "80:80"
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
     restart: unless-stopped
